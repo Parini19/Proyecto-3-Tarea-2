@@ -58,3 +58,13 @@ export interface IGame {
   updatedAt?: string;
   status?: string;
 }
+
+export interface IProduct{
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: number;
+  stock?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
