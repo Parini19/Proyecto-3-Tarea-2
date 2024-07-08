@@ -10,11 +10,11 @@
                 <p class="mb-0">Add Product</p>
             </button>
         </div>
-        <app-product-list>
-            [itemList] = "itemList"
-        </app-product-list>
+        <app-product-list
+            [itemList] = "service.items$()"
+        />
         } @loading (after 100ms; minimum 1s) {
-        <app-loader></app-loader>
+            <app-loader></app-loader>
         }
     </div>
 </div>
