@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ModalComponent } from '../../modal/modal.component';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { ICategory } from '../../../interfaces';
+import { CategoryService } from '../../../services/categories.service';
 
 @Component({
   selector: 'app-category-list',
@@ -17,12 +18,19 @@ import { ICategory } from '../../../interfaces';
 })
 export class CategoryListComponent {
   @Input() itemList: ICategory[] = [];
-
   public selectedItem: ICategory = {};
+  public categoryService: CategoryService = inject(CategoryService);
 
-  showDetail (item: ICategory, modal: any) {
-    console.log('Detail item', item);
-    this.selectedItem = item;
+  showDetailModal(item:ICategory, modal: any) {
+    this.selectedItem = {...item}
     modal.show();
+  }
+
+  handleFormAction(item: ICategory) {
+    this.categoryService.update(item);
+  }
+
+  deleteCategory(item: ICategory){
+    this.categoryService.delete(item);
   }
 }

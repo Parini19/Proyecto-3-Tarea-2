@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ICategory } from '../../../interfaces';
 
@@ -14,5 +14,11 @@ import { ICategory } from '../../../interfaces';
   styleUrl: './category-form.component.scss'
 })
 export class CategoryFormComponent {
-  @Input() item: ICategory = {};
+  @Input() category: ICategory = {};
+  @Input() action = '';
+  @Output() callParentEvent: EventEmitter<ICategory> = new EventEmitter<ICategory>();
+
+  callEvent() {
+    this.callParentEvent.emit(this.category);
+  }
 }

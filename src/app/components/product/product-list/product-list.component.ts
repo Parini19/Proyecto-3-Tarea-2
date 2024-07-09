@@ -31,4 +31,8 @@ export class ProductListComponent {
     this.productService.update(item);
   }
 
+  deleteProduct(item: IProduct){
+    this.productService.delete(item);
+  }
+
 }

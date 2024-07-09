@@ -5,6 +5,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { CategoryFormComponent } from '../../components/category/category-form/category-form.component';
 import { ICategory } from '../../interfaces';
 import { CategoryService } from '../../services/categories.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
@@ -13,16 +14,21 @@ import { CategoryService } from '../../services/categories.service';
     CategoryListComponent,
     LoaderComponent,
     ModalComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    CommonModule
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent {
   public itemList: ICategory[] = [];
-  public service = inject(CategoryService)
+  public categoryService: CategoryService = inject(CategoryService);
 
   constructor() {
-    this.service.getAll();
+    this.categoryService.getAll();
+  }
+
+  handleFormAction(item: ICategory) {
+    this.categoryService.save(item);
   }
 }

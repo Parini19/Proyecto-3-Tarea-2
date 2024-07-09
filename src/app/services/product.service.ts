@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { IProduct } from '../interfaces';
 import { BaseService } from './base-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { BaseService } from './base-service';
 export class ProductService extends BaseService<IProduct>{
   protected override source: string = 'products'
   private itemListSignal = signal<IProduct[]>([])
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   get items$ () {
     return this.itemListSignal;
@@ -22,6 +24,11 @@ export class ProductService extends BaseService<IProduct>{
       },
       error: (error: any) => {
         console.error('Error in get all products request', error);
+        this.snackBar.open(error.error.description, 'Close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar']
+        });
       }
     })
   }
@@ -34,6 +41,11 @@ export class ProductService extends BaseService<IProduct>{
     },
     error: (error: any) => {
       console.error('response', error.description);
+      this.snackBar.open(error.error.description, 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
     }
    })
 }
@@ -46,6 +58,27 @@ public update(item: IProduct) {
    },
    error: (error: any) => {
      console.error('response', error.description);
+     this.snackBar.open(error.error.description, 'Close', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
+    });
+   }
+  })
+}
+
+public delete(item: IProduct) {
+  this.del(item.id).subscribe({
+   next: () => {
+    this.itemListSignal.set(this.itemListSignal().filter(product => product.id != item.id));
+   },
+   error: (error: any) => {
+     console.error('response', error.description);
+     this.snackBar.open(error.error.description, 'Close', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
+    });
    }
   })
 }
