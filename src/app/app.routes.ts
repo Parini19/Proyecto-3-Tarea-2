@@ -12,6 +12,7 @@ import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 
 export const routes: Routes = [
   {
@@ -82,19 +83,19 @@ export const routes: Routes = [
           name: 'profile'
         }
       },
-      {
-        path: 'games',
-        component: GamesComponent,
-        data: { 
-          authorities: [
-            IRoleType.admin, 
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
-          showInSidebar: true,
-          name: 'games'
-        }
-      },
+      // {
+      //   path: 'games',
+      //   component: GamesComponent,
+      //   data: { 
+      //     authorities: [
+      //       IRoleType.admin, 
+      //       IRoleType.superAdmin,
+      //       IRoleType.user
+      //     ],
+      //     showInSidebar: true,
+      //     name: 'games'
+      //   }
+      // },
       {
         path: 'products',
         component: ProductsComponent,
@@ -106,6 +107,19 @@ export const routes: Routes = [
           ],
           showInSidebar: true,
           name: 'Products'
+        }
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        data: { 
+          authorities: [
+            IRoleType.admin, 
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          showInSidebar: true,
+          name: 'Categories'
         }
       }
     ],

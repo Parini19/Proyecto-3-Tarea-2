@@ -16,6 +16,7 @@ export class ProductService extends BaseService<IProduct>{
   public getAll() {
     this.findAll().subscribe({
       next: (response: any) => {
+        response.reverse();
         console.log('response', response);
         this.itemListSignal.set(response);
       },
@@ -24,4 +25,28 @@ export class ProductService extends BaseService<IProduct>{
       }
     })
   }
+
+  public save(item: IProduct) {
+   this.add(item).subscribe({
+    next: (response: any) => {
+      console.log('response', response);
+      this.itemListSignal.update((products: IProduct[]) => [response, ...products]);
+    },
+    error: (error: any) => {
+      console.error('response', error.description);
+    }
+   })
+}
+
+public update(item: IProduct) {
+  this.add(item).subscribe({
+   next: (response: any) => {
+    const updatedItems = this.itemListSignal().map(product => product.id === item.id ? item: product)
+    this.itemListSignal.set(updatedItems);
+   },
+   error: (error: any) => {
+     console.error('response', error.description);
+   }
+  })
+}
 }

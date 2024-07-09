@@ -65,6 +65,11 @@ export interface IProduct{
   description?: string;
   price?: number;
   stock?: number;
-  createdAt?: string;
-  updatedAt?: string;
+  category?: ICategory;
+}
+
+export interface ICategory{
+  id?: number;
+  name?: string;
+  description?: string;
 }

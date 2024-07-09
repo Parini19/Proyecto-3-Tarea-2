@@ -1,1 +1,29 @@
-<p>category-form works!</p>
+<form class="container">
+    <div>
+      
+    </div>
+    <div class="row">
+      <div class="col-6 mb-2">
+        <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+          placeholder="Name"
+          [(ngModel)]="item.name" 
+          [ngClass]="{ 
+            'is-invalid': name.invalid && name.touched,
+            'is-valid': name.valid && name.touched
+          }" 
+          required 
+        />
+      </div>
+      <div class="col-6 mb-2">
+        <input #description="ngModel" type="text" class="form-control" id="description" name="description" 
+          placeholder="Description"
+          [(ngModel)]="item.description" 
+          [ngClass]="{ 
+            'is-invalid': description.invalid && description.touched,
+            'is-valid': description.valid && description.touched
+          }" 
+          required 
+        />
+      </div>
+    </div>
+  </form>

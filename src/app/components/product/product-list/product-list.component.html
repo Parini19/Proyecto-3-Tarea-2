@@ -8,6 +8,8 @@
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,8 +20,12 @@
                     <td>{{item.description}}</td>
                     <td>{{item.price}}</td>
                     <td>{{item.stock}}</td>
+                    <td>{{item.category}}</td>
                     <td>
-                        <button type="button" class="btn btn-secondary me-3">
+                        <button 
+                        (click)="showDetailModal(item, detailModal)"
+                        type="button"  
+                        class="btn btn-secondary me-3">
                             <i class="fa-solid fa-eye white"></i>
                         </button>
                         <button type="button" class="btn btn-danger">
@@ -36,3 +42,11 @@
         </table>
     </div>
 </div>
+
+<app-modal #detailModal>
+    <app-product-form 
+    [product]="selectedItem"
+    [action]="'Update product'"
+    (callParentEvent)= "handleFormAction($event)">
+    </app-product-form>
+</app-modal>

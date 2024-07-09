@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IProduct } from '../../../interfaces';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ICategory } from '../../../interfaces/index';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent {
+  @Input() product: IProduct = {};
+  @Input() action = '';
+  @Output() callParentEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 
+  callEvent() {
+    this.callParentEvent.emit(this.product);
+  }
 }
