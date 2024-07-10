@@ -14,7 +14,8 @@
             </button>
         </div>
         <app-product-list
-            [itemList] = "productService.items$()"
+        [areActionAvailable] = "true"
+        [itemList] = "productService.items$()"
         />
         } @loading (after 100ms; minimum 1s) {
             <app-loader></app-loader>

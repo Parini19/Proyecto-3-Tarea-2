@@ -11,6 +11,7 @@
             </button>
         </div>
         <app-category-list
+            [areActionAvailable] = "true"
             [itemList] = "categoryService.items$()"
         />
         } @loading (after 100ms; minimum 1s) {
