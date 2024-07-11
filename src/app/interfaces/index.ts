@@ -65,6 +65,8 @@ export interface IProduct{
   description?: string;
   price?: number;
   stock?: number;
+  idCategory?: number,
+  nameCategory?: string,
   category?: ICategory;
 }
 

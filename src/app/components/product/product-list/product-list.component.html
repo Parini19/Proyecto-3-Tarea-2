@@ -20,7 +20,7 @@
                     <td>{{item.description}}</td>
                     <td>{{item.price}}</td>
                     <td>{{item.stock}}</td>
-                    <td>{{item.category}}</td>
+                    <td>{{item.nameCategory != null ? item.nameCategory : item.category?.name}}</td>
                     <td>
                         <button 
                         (click)="showDetailModal(item, detailModal)"
